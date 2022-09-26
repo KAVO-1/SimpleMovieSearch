@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMovieSearch", "SimpleMovieSearch\SimpleMovieSearch.csproj", "{4C343912-9F9A-4754-97CF-26E681A6827F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A819DBE9-B754-407C-89D9-271C6E26DD3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMovieSearch.Domain", "SimpleMovieSearch.Domain\SimpleMovieSearch.Domain.csproj", "{730A7580-06A3-4866-8FCF-36067B4485BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{757915F5-BD62-4E03-BADC-613C69A3A61E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMovieSearch.DAL", "SimpleMovieSearch.DAL\SimpleMovieSearch.DAL.csproj", "{210C13F5-D4D7-49F1-A968-07B9799BC9AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{5D9DCADC-71C6-4197-AD6E-9D0BB53A631B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMovieSearch.Service", "SimpleMovieSearch.Service\SimpleMovieSearch.Service.csproj", "{7C672CCF-C076-45E6-A4A6-D6C1768DDD70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C343912-9F9A-4754-97CF-26E681A6827F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C343912-9F9A-4754-97CF-26E681A6827F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C343912-9F9A-4754-97CF-26E681A6827F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C343912-9F9A-4754-97CF-26E681A6827F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{730A7580-06A3-4866-8FCF-36067B4485BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{730A7580-06A3-4866-8FCF-36067B4485BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{730A7580-06A3-4866-8FCF-36067B4485BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{730A7580-06A3-4866-8FCF-36067B4485BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210C13F5-D4D7-49F1-A968-07B9799BC9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210C13F5-D4D7-49F1-A968-07B9799BC9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210C13F5-D4D7-49F1-A968-07B9799BC9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210C13F5-D4D7-49F1-A968-07B9799BC9AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C672CCF-C076-45E6-A4A6-D6C1768DDD70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C672CCF-C076-45E6-A4A6-D6C1768DDD70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C672CCF-C076-45E6-A4A6-D6C1768DDD70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C672CCF-C076-45E6-A4A6-D6C1768DDD70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{730A7580-06A3-4866-8FCF-36067B4485BE} = {A819DBE9-B754-407C-89D9-271C6E26DD3A}
+		{210C13F5-D4D7-49F1-A968-07B9799BC9AF} = {757915F5-BD62-4E03-BADC-613C69A3A61E}
+		{7C672CCF-C076-45E6-A4A6-D6C1768DDD70} = {5D9DCADC-71C6-4197-AD6E-9D0BB53A631B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D1399F3-E5F6-4BC6-9740-4A6A03A5D5B0}
+	EndGlobalSection
+EndGlobal

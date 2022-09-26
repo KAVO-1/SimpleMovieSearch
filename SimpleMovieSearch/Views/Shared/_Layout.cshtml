@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SimpleMovieSearch</title>
+   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/SimpleMovieSearch.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css"/>
+    <link rel="stylesheet" href="~/css/card.css"/>
+    <link rel="stylesheet" href="~/css/label.css"/>
+    <link rel="stylesheet" href="~/css/menu.css"/>
+    <link rel="stylesheet" href="~/css/paragraph.css"/>
+    
+    
+</head>
+<body class="kavo  text-white-50 d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-sm  bg-dark pb-1 ">
+            <div class="container-fluid">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="filmEffect" src="~/images/Logo.png" width="80" height="80"/>
+                </a> 
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Movie" asp-action="MovieIndex">Movie List</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="input-group pb-1" style="width: 300px" >
+                   <input  type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                   <button type="button" class="btn btn-outline-danger">search</button>
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container-fluid">
+        <main role="main" class="pb-2">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <footer class="mt-auto page-footer font-small blue">
+
+       <div class="footer-copyright text-center py-3 text-white-50 bg-dark container-fluid">© 2020 Copyright:
+          <a href="/" class="text-white-50 bg-dark"> KAVO-Film.com</a>
+       </div>
+    </footer>
+</body>
+</html>
+
+
+           

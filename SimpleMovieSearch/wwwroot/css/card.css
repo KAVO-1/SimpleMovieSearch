@@ -1,0 +1,23 @@
+﻿.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.card {
+    box-shadow: 4px 14px 5px 3px #0c0808;
+}
+
+.card-title {
+    font-family: 'Cascadia Code';
+    font-size: 30px;
+}
+.card-text {
+    font-family: 'Cascadia Code';
+    font-size: 15px;
+    opacity: 0,4;
+}
+
+.card-buttons-group {
+    text-align: right;
+    padding: 10px;
+}
