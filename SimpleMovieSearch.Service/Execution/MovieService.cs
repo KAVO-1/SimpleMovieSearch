@@ -48,8 +48,7 @@ namespace SimpleMovieSearch.Service.Execution
 
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        ////////////////////////////////////////////////////////////////////////////
 
 
         public async Task<IBaseResponse<bool>> DeleteMovie(int id)
@@ -82,9 +81,8 @@ namespace SimpleMovieSearch.Service.Execution
                     StatusName = StatusName.InternalServerError
                 };
             }
-
+             
         }
-
 
         public async Task<IBaseResponse<MovieViewModels>> GetMovie(int id)
         {
@@ -124,7 +122,6 @@ namespace SimpleMovieSearch.Service.Execution
             }
 
         }
-
 
 
 
