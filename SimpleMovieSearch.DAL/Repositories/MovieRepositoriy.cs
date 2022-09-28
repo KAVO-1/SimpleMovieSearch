@@ -37,6 +37,11 @@ namespace SimpleMovieSearch.DAL.Repositories
             return await _context.Movie.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public  IQueryable<Movie> GetAll() //это БАЗА
+        {
+            return _context.Movie;
+        }
+
         public async Task<Movie> GetMovieName(string name)
         {
             return await _context.Movie.FirstOrDefaultAsync(x => x.Name == name);

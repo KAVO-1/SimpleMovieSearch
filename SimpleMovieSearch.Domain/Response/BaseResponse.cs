@@ -16,6 +16,7 @@ namespace SimpleMovieSearch.Domain.Response
 
     public interface IBaseResponse<T>
     {
+        string Description { get;}
         public StatusName StatusName { get; }
         T Data { get; }
     }
