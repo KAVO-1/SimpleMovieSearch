@@ -87,6 +87,9 @@ namespace SimpleMovieSearch.Controllers
 
 
 
+
+
+
         [HttpGet]
         public async Task<IActionResult> MovieSearch( string search) // Поиск
         {

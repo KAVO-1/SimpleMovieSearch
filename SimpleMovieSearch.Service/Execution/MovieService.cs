@@ -122,9 +122,7 @@ namespace SimpleMovieSearch.Service.Execution
             }
 
         }
-
-
-
+         
 
 
         public async Task<IBaseResponse<Movie>> GetMovieName(string name)
