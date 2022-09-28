@@ -85,20 +85,13 @@ namespace SimpleMovieSearch.Controllers
             return RedirectToAction("GetMovie");
         }
 
-
-
-
-
+         
 
         [HttpGet]
         public async Task<IActionResult> MovieSearch( string search) // Поиск
         {
-
             var response = await _movieService.GetMovieName(search);
-            if (response.StatusName == StatusName.OK)
-            {
-                return View(response.Data);
-            }
+
             return View(response.Data);
         }
 

@@ -16,6 +16,7 @@ namespace SimpleMovieSearch.DAL.Interfaces
 
         Task<List<T>> Select();
         Task<T> Update(T entity);
-        //IQueryable<T> GetAll();
+
+        IQueryable<T> GetAll();  //это БАЗА
     }
 }

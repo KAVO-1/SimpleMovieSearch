@@ -1,4 +1,5 @@
-﻿using SimpleMovieSearch.DAL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleMovieSearch.DAL.Interfaces;
 using SimpleMovieSearch.Domain.Entity;
 using SimpleMovieSearch.Domain.Enum;
 using SimpleMovieSearch.Domain.Response;
@@ -125,27 +126,32 @@ namespace SimpleMovieSearch.Service.Execution
          
 
 
-        public async Task<IBaseResponse<Movie>> GetMovieName(string name)
+        public async Task<IBaseResponse<MovieViewModels>> GetMovieName(string name) //KAVO method
         {
-            var baseResponse = new BaseResponse<Movie>();
-
             try
             {
-                var movie = await _movieRepository.GetMovieName(name);
-
+                var movie = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Name == name);
                 if (movie == null)
                 {
-                    baseResponse.Description = "Error, user not found";
-                    baseResponse.StatusName = StatusName.UserNotFound;
-                    return baseResponse;
+                    return new BaseResponse<MovieViewModels>()  
+                     {
+                        Description = "Error, not found",
+                        StatusName = StatusName.UserNotFound
+                    };
                 }
-                baseResponse.Data = movie;
-                return baseResponse;
-
+                var data = new MovieViewModels()
+                {
+                    Name = movie.Name,
+                };
+                return new BaseResponse<MovieViewModels>()
+                {
+                    StatusName = StatusName.OK,
+                    Data = data
+                };
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Movie>()
+                return new BaseResponse<MovieViewModels>()
                 {
                     Description = $"[GetMovieName] : {ex.Message}",
                     StatusName = StatusName.InternalServerError
@@ -153,7 +159,7 @@ namespace SimpleMovieSearch.Service.Execution
 
             }
 
-        }
+        } 
 
 
 

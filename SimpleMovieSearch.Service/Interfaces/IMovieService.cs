@@ -15,7 +15,7 @@ namespace SimpleMovieSearch.Service.Interfaces
         Task<IBaseResponse<MovieViewModels>> CreateMovie(MovieViewModels movieViewModels);
         Task<IBaseResponse<bool>> DeleteMovie(int id);
         Task<IBaseResponse<MovieViewModels>> GetMovie(int id);
-        Task<IBaseResponse<Movie>> GetMovieName(string name);
+        Task<IBaseResponse<MovieViewModels>> GetMovieName(string name);
         Task<IBaseResponse<Movie>> Edit(int id, MovieViewModels model); 
     }
 }
