@@ -49,9 +49,6 @@ namespace SimpleMovieSearch.Service.Execution
 
         }
 
-        ////////////////////////////////////////////////////////////////////////////
-
-
         public async Task<IBaseResponse<bool>> DeleteMovie(int id)
         {
             var baseResponse = new BaseResponse<bool>()
@@ -84,6 +81,8 @@ namespace SimpleMovieSearch.Service.Execution
             }
              
         }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public async Task<IBaseResponse<MovieViewModels>> GetMovie(int id)
         {
@@ -126,24 +125,27 @@ namespace SimpleMovieSearch.Service.Execution
          
 
 
-        public async Task<IBaseResponse<MovieViewModels>> GetMovieName(string name) //KAVO method
+        public async Task<IBaseResponse<Movie>> GetMovieName(string name) //KAVO method
         {
             try
             {
-                var movie = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Name == name);
-                if (movie == null)
+                var car = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Name == name);
+                if (car == null)
                 {
-                    return new BaseResponse<MovieViewModels>()  
-                     {
-                        Description = "Error, not found",
+                    return new BaseResponse<Movie>()
+                    {
+                        Description = "Пользователь не найден",
                         StatusName = StatusName.UserNotFound
                     };
                 }
-                var data = new MovieViewModels()
+
+                var data = new Movie()
                 {
-                    Name = movie.Name,
+                    Description = car.Description,
+                    Name = car.Name,
                 };
-                return new BaseResponse<MovieViewModels>()
+
+                return new BaseResponse<Movie>()
                 {
                     StatusName = StatusName.OK,
                     Data = data
@@ -151,19 +153,14 @@ namespace SimpleMovieSearch.Service.Execution
             }
             catch (Exception ex)
             {
-                return new BaseResponse<MovieViewModels>()
+                return new BaseResponse<Movie>()
                 {
                     Description = $"[GetMovieName] : {ex.Message}",
                     StatusName = StatusName.InternalServerError
                 };
-
             }
 
         } 
-
-
-
-
 
 
 
