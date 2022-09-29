@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="~/css/label.css"/>
     <link rel="stylesheet" href="~/css/menu.css"/>
     <link rel="stylesheet" href="~/css/paragraph.css"/>
-    
-    
+
+
 </head>
 <body class="kavo  text-white-50 d-flex flex-column min-vh-100">
     <header>
@@ -41,10 +41,14 @@
                 </div>
 
 
-                <div class="input-group pb-1" style="width: 300px" >
-                   <input  type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                   <button type="button" class="btn btn-outline-danger">search</button> 
-                </div>    
+                         <div class="navbar-nav flex-grow-4">
+                             <from asp-action="MovieSearch" >
+                                <span class="btn-group pb-1">
+                                    <input type="text" name="search" />
+                                    <input class="p-1 ml-2 btn btn-outline-danger" type="submit" value="GO" />
+                                </span>
+                             </from>
+                         </div>
 
 
             </div>
@@ -73,4 +77,3 @@
 </html>
 
 
-           

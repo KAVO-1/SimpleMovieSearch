@@ -21,24 +21,47 @@ namespace SimpleMovieSearch.Controllers
         public async Task<IActionResult> MovieIndex() //список всех фильмов
         {
             var resp = await _movieService.GetMovieList();
-            return View(resp.Data.ToList());
+            if (resp.StatusName == StatusName.OK)
+            {
+                return View(resp.Data);
+            }
+            return View(resp.Data);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMovie(int id) //получить один фильм по Id
         {
-            var response = await _movieService.GetMovie(id);
-            if (response.StatusName == StatusName.OK)
+            var resp = await _movieService.GetMovie(id);
+            if (resp.StatusName == StatusName.OK)
             {
-                return View(response.Data);
+                return View(resp.Data);
             }
-            return View(response.Data);
+            return View(resp.Data);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MovieSearch(string search) // Поиск
+        {
+            var resp = await _movieService.GetMovieName(search);
+            if (resp.StatusName == StatusName.OK)
+            {
+                return View(resp.Data);
+            }
+            return View(resp.Data);
+        }
+
+
+
+
+
+
+
+
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id) //удaлить фильм (админ)
         {
-            
+
             var resp = await _movieService.DeleteMovie(id);
 
             if (resp.StatusName == StatusName.OK)
@@ -53,12 +76,12 @@ namespace SimpleMovieSearch.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Save(int id) //сохранить фильм (админ)
         {
-            if (id==0)
+            if (id == 0)
             {
                 return View();
             }
 
-            var resp = await _movieService.GetMovie( id);
+            var resp = await _movieService.GetMovie(id);
             if (resp.StatusName == StatusName.OK)
             {
                 return View(resp.Data);
@@ -80,20 +103,11 @@ namespace SimpleMovieSearch.Controllers
                 {
                     await _movieService.Edit(movieViewModels.Id, movieViewModels);
                 }
-             
+
             }
             return RedirectToAction("GetMovie");
         }
 
-         
-
-        [HttpGet]
-        public async Task<IActionResult> MovieSearch( string search) // Поиск
-        {
-            var response = await _movieService.GetMovieName(search);
-
-            return View(response.Data);
-        }
 
     }
 }
