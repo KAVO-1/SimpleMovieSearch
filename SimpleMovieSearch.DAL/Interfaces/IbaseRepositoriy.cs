@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace SimpleMovieSearch.DAL.Interfaces
 {
-    public interface IbaseRepositoriy<T>
-    {
-        Task<bool> Create(T entity);
-
-        Task<bool> Delete(T entity);
-
-        Task<T> Get(int id);
-
-        Task<List<T>> Select();
+    public interface IBaseRepositoriy<T>
+    { 
+        Task Create(T entity);
+        Task Delete(T entity);
+        IQueryable<T> GetAll();  //это БАЗА
         Task<T> Update(T entity);
 
-        IQueryable<T> GetAll();  //это БАЗА
+       
+
+       
     }
 }

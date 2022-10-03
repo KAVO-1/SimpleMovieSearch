@@ -39,19 +39,7 @@ namespace SimpleMovieSearch.Controllers
             return View(resp.Data);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> MovieSearch(string search) // Поиск
-        {
-            var resp = await _movieService.GetMovieName(search);
-            if (resp.StatusName == StatusName.OK)
-            {
-                return View(resp.Data);
-            }
-            return View(resp.Data);
-        }
-
-
-
+        
 
 
 
