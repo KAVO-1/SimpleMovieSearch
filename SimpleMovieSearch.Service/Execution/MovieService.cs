@@ -8,24 +8,23 @@ using SimpleMovieSearch.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleMovieSearch.Service.Execution
 {
     public class MovieService : IMovieService
-    {
-        private readonly IMovieRepositoriy _movieRepository;
+    { 
+        private readonly IBaseRepositoriy<Movie> _movieRepository;
 
-        public MovieService(IMovieRepositoriy movieRepository)
+        public MovieService(IBaseRepositoriy<Movie> movieRepository)
         {
             _movieRepository = movieRepository;
         }
 
-
-        public async Task<IBaseResponse<MovieViewModels>> CreateMovie(MovieViewModels movieViewModels)
+        public async Task<IBaseResponse<Movie>> CreateMovie(MovieViewModels movieViewModels)
         {
-            var baseResponse = new BaseResponse<MovieViewModels>();
             try
             {
                 var movie = new Movie()
@@ -33,43 +32,47 @@ namespace SimpleMovieSearch.Service.Execution
                     Name = movieViewModels.Name,
                     Description = movieViewModels.Description,
                     Country = movieViewModels.Country,
-                    MoviesCategory = movieViewModels.MoviesCategory,
+                    MoviesCategory= movieViewModels.MoviesCategory,
                 };
                 await _movieRepository.Create(movie);
+
+                return new BaseResponse<Movie>()
+                {
+                    StatusName = StatusName.OK,
+                    Data = movie
+                };
             }
             catch (Exception ex)
             {
-                return new BaseResponse<MovieViewModels>()
+                return new BaseResponse<Movie>()
                 {
                     Description = $"[CreateMovie] : {ex.Message}",
                     StatusName = StatusName.InternalServerError
                 };
             }
-            return baseResponse;
 
         }
 
         public async Task<IBaseResponse<bool>> DeleteMovie(int id)
         {
-            var baseResponse = new BaseResponse<bool>()
-            {
-                Data = true
-            };
             try
             {
-                var movie = await _movieRepository.Get(id);
-
+                var movie = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (movie == null)
                 {
-                    baseResponse.Description = "Error, user not found";
-                    baseResponse.StatusName = StatusName.UserNotFound;
-                    baseResponse.Data = false;
-                    return baseResponse;
+                    return new BaseResponse<bool>()
+                    {
+                        Description = "Movie not found",
+                        StatusName = StatusName.UserNotFound,
+                        Data = false
+                    };
                 }
-                
-                await _movieRepository.Delete(movie);
-                return baseResponse;
 
+                return new BaseResponse<bool>()
+                {
+                    Data = true,
+                    StatusName = StatusName.OK
+                };
             }
             catch (Exception ex)
             {
@@ -79,37 +82,36 @@ namespace SimpleMovieSearch.Service.Execution
                     StatusName = StatusName.InternalServerError
                 };
             }
-             
-        }
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
         public async Task<IBaseResponse<MovieViewModels>> GetMovie(int id)
         {
-            var baseResponse = new BaseResponse<MovieViewModels>();
             try
             {
-                var movie = await _movieRepository.Get(id);
-
+                var movie = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (movie == null)
                 {
-                    baseResponse.Description = "Error, user not found";
-                    baseResponse.StatusName = StatusName.UserNotFound;
-                    return baseResponse; 
+                    return new BaseResponse<MovieViewModels>()
+                    {
+                        Description = "Film не найден",
+                        StatusName = StatusName.UserNotFound
+                    };
                 }
+
                 var data = new MovieViewModels()
                 {
+                    Description = movie.Description,
                     Name = movie.Name,
                     Country = movie.Country,
-                    Description = movie.Description,
-                    MoviesCategory = movie.MoviesCategory,
-                    Id = movie.Id,
+                    MoviesCategory = movie.MoviesCategory
                 };
 
-                baseResponse.StatusName = StatusName.OK;
-                baseResponse.Data = data;
-                return baseResponse;
-
+                return new BaseResponse<MovieViewModels>()
+                {
+                    StatusName = StatusName.OK,
+                    Data = data
+                };
             }
             catch (Exception ex)
             {
@@ -118,72 +120,29 @@ namespace SimpleMovieSearch.Service.Execution
                     Description = $"[GetMovie] : {ex.Message}",
                     StatusName = StatusName.InternalServerError
                 };
-
             }
 
         }
          
-
-
-        public async Task<IBaseResponse<Movie>> GetMovieName(string name) //KAVO method
+        public async Task<IBaseResponse<IEnumerable<Movie>>> GetMovieList() 
         {
             try
             {
-                var car = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Name == name);
-                if (car == null)
+                var movies = _movieRepository.GetAll().ToList();
+                if (!movies.Any())
                 {
-                    return new BaseResponse<Movie>()
+                    return new BaseResponse<IEnumerable<Movie>>()
                     {
-                        Description = "Пользователь не найден",
-                        StatusName = StatusName.UserNotFound
+                        Description = "Найдено 0 элементов",
+                        StatusName = StatusName.OK
                     };
                 }
 
-                var data = new Movie()
+                return new BaseResponse<IEnumerable<Movie>>()
                 {
-                    Description = car.Description,
-                    Name = car.Name,
+                    Data = movies,
+                    StatusName = StatusName.OK
                 };
-
-                return new BaseResponse<Movie>()
-                {
-                    StatusName = StatusName.OK,
-                    Data = data
-                };
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse<Movie>()
-                {
-                    Description = $"[GetMovieName] : {ex.Message}",
-                    StatusName = StatusName.InternalServerError
-                };
-            }
-
-        } 
-
-
-
-
-
-        public async Task<IBaseResponse<IEnumerable<Movie>>> GetMovieList() 
-        {
-            var baseResponse = new BaseResponse<IEnumerable<Movie>>();
-            try
-            {
-                var movies = await _movieRepository.Select();
-
-                if (movies.Count==0)
-                {
-                    baseResponse.Description = "Error, zero elements found";
-                    baseResponse.StatusName = StatusName.OK;
-                    return baseResponse;
-                }
-                
-                baseResponse.Data = movies;
-                baseResponse.StatusName = StatusName.OK;
-                return baseResponse;
-
             }
             catch (Exception ex)
             {
@@ -192,23 +151,23 @@ namespace SimpleMovieSearch.Service.Execution
                     Description = $"[GetMovieList] : {ex.Message}",
                     StatusName = StatusName.InternalServerError
                 };
-
             }
 
         }
 
         public async Task<IBaseResponse<Movie>> Edit(int id, MovieViewModels model)
         {
-            var baseResponse = new BaseResponse<Movie>();
             try
             {
-                var movie = await _movieRepository.Get(id);
+                var movie = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
 
                 if (movie == null)
-                { 
-                    baseResponse.StatusName = StatusName.MovieNotFound; 
-                    baseResponse.Description = "Error, movie not found";
-                    return baseResponse;
+                {
+                    return new BaseResponse<Movie>()
+                    {
+                        Description = "Movie not found",
+                        StatusName = StatusName.MovieNotFound
+                    };
                 }
 
                 movie.Name = model.Name; 
@@ -217,8 +176,13 @@ namespace SimpleMovieSearch.Service.Execution
                 movie.MoviesCategory = model.MoviesCategory;
 
                 await _movieRepository.Update(movie);
-                return baseResponse;
-                    
+
+                return new BaseResponse<Movie>()
+                {
+                    Data = movie,
+                    StatusName = StatusName.OK,
+                };
+
             }
             catch (Exception ex)
             {

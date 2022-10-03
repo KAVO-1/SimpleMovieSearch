@@ -12,10 +12,9 @@ namespace SimpleMovieSearch.Service.Interfaces
     public interface IMovieService
     {
         Task<IBaseResponse<IEnumerable<Movie>>> GetMovieList();
-        Task<IBaseResponse<MovieViewModels>> CreateMovie(MovieViewModels movieViewModels);
+        Task<IBaseResponse<Movie>> CreateMovie(MovieViewModels movieViewModels);
         Task<IBaseResponse<bool>> DeleteMovie(int id);
         Task<IBaseResponse<MovieViewModels>> GetMovie(int id);
-        Task<IBaseResponse<Movie>> GetMovieName(string name);
         Task<IBaseResponse<Movie>> Edit(int id, MovieViewModels model); 
     }
 }

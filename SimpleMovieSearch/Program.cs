@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleMovieSearch.DAL;
 using SimpleMovieSearch.DAL.Interfaces;
 using SimpleMovieSearch.DAL.Repositories;
+using SimpleMovieSearch.Domain.Entity;
 using SimpleMovieSearch.Service.Execution;
 using SimpleMovieSearch.Service.Interfaces;
 
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IMovieRepositoriy, MovieRepositoriy>();
+builder.Services.AddScoped<IBaseRepositoriy<Movie>, MovieRepositoriy>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 
 

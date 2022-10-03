@@ -15,4 +15,8 @@
     <ProjectReference Include="..\SimpleMovieSearch.Service\SimpleMovieSearch.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+  </ItemGroup>
+
 </Project>
