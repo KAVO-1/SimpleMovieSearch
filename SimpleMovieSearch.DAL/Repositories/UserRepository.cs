@@ -10,24 +10,35 @@ namespace SimpleMovieSearch.DAL.Repositories
 {
     internal class UserRepository : IBaseRepositoriy<User>
     {
-        public Task Create(User entity)
+        private readonly ApplicationDbContext _dbContext;
+
+        public UserRepository(ApplicationDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task Delete(User entity)
+        public async Task Create(User entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.Users.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(User entity)
+        {
+            _dbContext.Users.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public IQueryable<User> GetAll()
         {
-            throw new NotImplementedException();
+           return _dbContext.Users;
         }
 
-        public Task<User> Update(User entity)
+        public async Task<User> Update(User entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Users.Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

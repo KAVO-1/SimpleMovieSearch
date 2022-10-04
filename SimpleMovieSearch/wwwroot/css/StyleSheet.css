@@ -3,3 +3,12 @@
     background-size: cover;
     background-attachment: fixed;
 }
+
+.image-dark{
+    filter: grayscale(1);
+    transition: 1s;
+}
+
+.image-dark:hover{
+    filter: grayscale(0);
+}

@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-sm  bg-dark pb-1 ">
             <div class="container-fluid">
                 <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <img class="filmEffect" src="~/images/Logo.png" width="80" height="80"/>
+                    <img class="filmEffect image-dark" src="~/images/Logo.png" width="80" height="80"/>
                 </a> 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,8 @@
     </header>
 
 
-    <div class="container-fluid">
-        <main role="main" class="pb-2">
+    <div>
+        <main role="main" class="">
             @RenderBody()
         </main>
     </div>

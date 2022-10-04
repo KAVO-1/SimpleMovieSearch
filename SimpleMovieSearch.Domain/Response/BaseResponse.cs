@@ -11,7 +11,7 @@ namespace SimpleMovieSearch.Domain.Response
     {
         public string Description { get; set; }
         public StatusName StatusName { get; set; }
-        public T Data { get; set; }
+        public T Data { get; set; } //Результат запроса (пример получаем коллекцию элементов объекта из БД и записываем их в Data)
     }
 
     public interface IBaseResponse<T>

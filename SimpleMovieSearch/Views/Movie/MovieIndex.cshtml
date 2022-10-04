@@ -1,17 +1,18 @@
-﻿@model List<SimpleMovieSearch.Domain.Entity.Movie>
-
-  <div class="text-center">
-        <h1 class="">Hello</h1>
+﻿@model List<SimpleMovieSearch.Domain.Entity.Movie> 
 
 
-    <img class="imagePosters filmEffect" src="~/images/fantasty/123123.png" /> @*1*@
-    <img class="imagePosters filmEffect" src="~/images/comedy/112140b3bd1572e45bed2491006f2fcb.jpg" /> @*2*@
-    <img class="imagePosters filmEffect" src="~/images/comedy/55218614.jpg" /> @*3*@
-    <img class="imagePosters filmEffect" src="~/images/comedy/3357f8721939bd301abf03404eee47ce.jpg" /> @*4*@
+<section class="first">
+    <video src="~/video/228.MP4" muted autoplay loop class="first__video"></video>
+    <div class="text-center first__title">
+
+    <img class="imagePosters filmEffect image-dark" src="~/images/fantasty/123123.png" />
+    <img class="imagePosters filmEffect image-dark" src="~/images/comedy/112140b3bd1572e45bed2491006f2fcb.jpg" />
+    <img class="imagePosters filmEffect image-dark" src="~/images/comedy/55218614.jpg" />
+    <img class="imagePosters filmEffect image-dark" src="~/images/comedy/3357f8721939bd301abf03404eee47ce.jpg" />
 
 
-@*
-    <img class="imagePosters filmEffect" src="~/images/fantasty/110ca1fb5919f4f0f341c0555aa1e39b.jpg" />
+
+    @*<img class="imagePosters filmEffect" src="~/images/fantasty/110ca1fb5919f4f0f341c0555aa1e39b.jpg" />
     <img class="imagePosters filmEffect" src="~/images/comedy/ae31312c244536d68ea2f3ce3b342480.jpg" />
     <img class="imagePosters filmEffect" src="~/images/fantasty/123344555555.png" />
     <img class="imagePosters filmEffect" src="~/images/fantasty/3453432222222.png" />
@@ -35,42 +36,52 @@
     <img class="imagePosters filmEffect" src="~/images/horror/9.jpg" />*@
 
   </div>
-               
-     <div class="row">
+   
+  <div class="row first__title">
         @foreach (var movie in Model)
         {
             <div class="container-fluid  col-md-2 text-center">
-                <div class="col" style="padding: 23px;">
-                        <div class="navbar bg-dark">
-                        <div class="card-body">
-                            <h5 class="text-center">@movie.Name</h5>
-                        </div>
-
-                            <img src="~/images/fantasty/sfges134325jewa1212.png" class=" imagePosters filmEffect"  alt="@movie.Name">
-
-                        @*<div class="card-body">        
-                            <p>@movie.Description</p>
-                        </div>*@    
-                        <div class="card-body"> 
-                                   
-                                <a asp-action="GetMovie" asp-route-id="@movie.Id" class="card-link btn btn-outline-primary">Watch Online</a>
-                                    
-                            @* <a asp-controller="Basket" asp-action="Add" asp-route-id="@id" class="card-link">Добавить</a> *@
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <hr/>
-                                <a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">Удалить</a>
-                                <a asp-controller="Movie" asp-action="Save" asp-route-id="@movie.Id" class="btn btn-primary">Изменить</a>
-                            }
-                        </div>
+                <div class="col ">
+                      
+                    @*<div class="card-body">        
+                        <p>@movie.Description</p>
+                    </div>*@    
+                    <div class="">
+                        <a asp-action="GetMovie" asp-route-id="@movie.Id" class="">
+                            <img src="~/images/fantasty/sfges134325jewa1212.png" class=" imagePosters filmEffect"  alt="@movie.Name"></a>
+                                <h5 class="text-center">@movie.Name</h5>     
+                        @* <a asp-controller="Basket" asp-action="Add" asp-route-id="@id" class="card-link">Добавить</a> *@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <hr/>
+                            <a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">Удалить</a>
+                            <a asp-controller="Movie" asp-action="Save" asp-route-id="@movie.Id" class="btn btn-primary">Изменить</a>
+                        }
                     </div>
+                    
                 </div>
             </div>
         }
-     </div>   
-
+    </div>   
+</section>
    
 
+ <style>
 
-
-
+    .first {
+        min-height: 100vh;
+        position: relative;
+    }
+    .first__title {
+        position: relative;
+        z-index: 10;
+    }
+    .first__video {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+ </style>
