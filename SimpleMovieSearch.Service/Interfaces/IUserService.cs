@@ -13,5 +13,6 @@ namespace SimpleMovieSearch.Service.Interfaces
     {
         Task<IBaseResponse<User>> Create(UserViewModel model);
         Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsers();
+        BaseResponse<Dictionary<int, string>> GetRoles();
     }
 }

@@ -37,21 +37,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="" asp-controller="Movie" asp-action="MovieIndex">Movie List</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Account" asp-action="Register">Registration</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
                     </ul>
-                </div>
-
-
-                         <div class="navbar-nav flex-grow-4">
-                             <from asp-action="MovieSearch" >
-                                <span class="btn-group pb-1">
-                                    <input type="text" name="search" />
-                                    <input class="p-1 ml-2 btn btn-outline-danger" type="submit" value="GO" />
-                                </span>
-                             </from>
-                         </div>
-
+                </div> 
 
             </div>
+                <div class="mx-auto" style="width: 300px;">
+                    <form asp-action="SearchMovie"asp-controller="Movie">
+                        <span class="btn-group pb-1">
+                         <input type="text" name="search" />
+                            <input class="p-1 ml-2 btn btn-outline-danger" type="submit" value="GO" />
+                        </span>
+                     </form>
+                </div>
+
         </nav>
     </header>
 

@@ -2,6 +2,7 @@
 using SimpleMovieSearch.DAL.Interfaces;
 using SimpleMovieSearch.Domain.Entity;
 using SimpleMovieSearch.Domain.Enum;
+using SimpleMovieSearch.Domain.Extensions;
 using SimpleMovieSearch.Domain.Response;
 using SimpleMovieSearch.Domain.ViewModels.Movie;
 using SimpleMovieSearch.Service.Interfaces;
@@ -32,7 +33,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Name = movieViewModels.Name,
                     Description = movieViewModels.Description,
                     Country = movieViewModels.Country,
-                    MoviesCategory= movieViewModels.MoviesCategory,
+                    //MoviesCategory = (MoviesCategory)Convert.ToInt32(movieViewModels.MoviesCategory),
                 };
                 await _movieRepository.Create(movie);
 
@@ -104,7 +105,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Description = movie.Description,
                     Name = movie.Name,
                     Country = movie.Country,
-                    MoviesCategory = movie.MoviesCategory
+                    //MoviesCategory = movie.MoviesCategory.GetDisplayName()
                 };
 
                 return new BaseResponse<MovieViewModels>()
@@ -124,21 +125,21 @@ namespace SimpleMovieSearch.Service.Execution
 
         }
          
-        public async Task<IBaseResponse<IEnumerable<Movie>>> GetMovieList() 
+        public  IBaseResponse<List<Movie>> GetMovieList() 
         {
             try
-            {
+            { 
                 var movies = _movieRepository.GetAll().ToList();
                 if (!movies.Any())
                 {
-                    return new BaseResponse<IEnumerable<Movie>>()
+                    return new BaseResponse<List<Movie>>()
                     {
                         Description = "Найдено 0 элементов",
                         StatusName = StatusName.OK
                     };
                 }
-
-                return new BaseResponse<IEnumerable<Movie>>()
+                 
+                return new BaseResponse<List<Movie>>()
                 {
                     Data = movies,
                     StatusName = StatusName.OK
@@ -146,9 +147,9 @@ namespace SimpleMovieSearch.Service.Execution
             }
             catch (Exception ex)
             {
-                return new BaseResponse<IEnumerable<Movie>>()
+                return new BaseResponse<List<Movie>>()
                 {
-                    Description = $"[GetMovieList] : {ex.Message}",
+                    Description = $"[GetCars] : {ex.Message}",
                     StatusName = StatusName.InternalServerError
                 };
             }
@@ -173,7 +174,7 @@ namespace SimpleMovieSearch.Service.Execution
                 movie.Name = model.Name; 
                 movie.Country = model.Country;
                 movie.Description = model.Description;
-                movie.MoviesCategory = model.MoviesCategory;
+                //movie.MoviesCategory = model.MoviesCategory;
 
                 await _movieRepository.Update(movie);
 
@@ -192,6 +193,45 @@ namespace SimpleMovieSearch.Service.Execution
                     StatusName = StatusName.InternalServerError
                 };
 
+            }
+        }
+
+        public async Task<IBaseResponse<MovieViewModels>> GetMovieName(string name)
+        {
+            try
+            {
+                var movie = await _movieRepository.GetAll().FirstOrDefaultAsync(x => x.Name == name);
+                if (movie == null)
+                {
+                    return new BaseResponse<MovieViewModels>()
+                    {
+                        Description = "Film не найден",
+                        StatusName = StatusName.UserNotFound
+                    };
+                }
+                var data = new MovieViewModels()
+                {   
+                    Name = movie.Name,
+                    Description = movie.Description,
+                    Country = movie.Country,
+                    MoviesCategory = movie.MoviesCategory,
+
+                };
+
+                return new BaseResponse<MovieViewModels>()
+                {
+                    StatusName = StatusName.OK,
+                    Data = data
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<MovieViewModels>()
+                {
+                    Description = $"[GetMovie] : {ex.Message}",
+                    StatusName = StatusName.InternalServerError
+                };
             }
         }
     }

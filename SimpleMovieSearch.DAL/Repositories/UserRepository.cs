@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleMovieSearch.DAL.Repositories
 {
-    internal class UserRepository : IBaseRepositoriy<User>
+    public class UserRepository : IBaseRepositoriy<User>
     {
         private readonly ApplicationDbContext _dbContext;
 

@@ -13,9 +13,9 @@ namespace SimpleMovieSearch.Domain.ViewModels.User
         [Display(Name = "Id")]
         public long Id { get; set; }
 
-        //[Required(ErrorMessage = "Укажите роль")]
-        //[Display(Name = "Роль")]
-        //public string Role { get; set; }
+        [Required(ErrorMessage = "Укажите роль")]
+        [Display(Name = "Роль")]
+        public string Role { get; set; }
 
         [Required(ErrorMessage = "Укажите логин")]
         [Display(Name = "Логин")]

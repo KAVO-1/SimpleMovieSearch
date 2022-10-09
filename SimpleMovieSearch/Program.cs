@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SimpleMovieSearch.DAL;
 using SimpleMovieSearch.DAL.Interfaces;
@@ -6,6 +7,7 @@ using SimpleMovieSearch.Domain.Entity;
 using SimpleMovieSearch.Service.Execution;
 using SimpleMovieSearch.Service.Interfaces;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -13,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBaseRepositoriy<Movie>, MovieRepositoriy>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IBaseRepositoriy<User>, UserRepository>();;
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 
 
@@ -20,6 +25,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+        options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+    });
 
 
 var app = builder.Build();
@@ -36,6 +48,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

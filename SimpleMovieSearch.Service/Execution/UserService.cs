@@ -1,4 +1,6 @@
-﻿using SimpleMovieSearch.Domain.Entity;
+﻿using Microsoft.Extensions.Logging;
+using SimpleMovieSearch.DAL.Interfaces;
+using SimpleMovieSearch.Domain.Entity;
 using SimpleMovieSearch.Domain.Response;
 using SimpleMovieSearch.Domain.ViewModels.User;
 using SimpleMovieSearch.Service.Interfaces;
@@ -12,12 +14,26 @@ namespace SimpleMovieSearch.Service.Execution
 {
     public class UserService : IUserService
     {
+        private readonly ILogger<UserService> _logger;
+        private readonly IBaseRepositoriy<User> _userRepository;
+
+        public UserService(ILogger<UserService> logger, IBaseRepositoriy<User> userRepository)
+        { 
+            _logger = logger;
+            _userRepository = userRepository;
+        }
         public Task<IBaseResponse<User>> Create(UserViewModel model)
         {
             throw new NotImplementedException();
         }
 
+
         public Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+        
+        public BaseResponse<Dictionary<int, string>> GetRoles()
         {
             throw new NotImplementedException();
         }

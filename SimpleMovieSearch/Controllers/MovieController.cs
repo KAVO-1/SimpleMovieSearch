@@ -5,6 +5,7 @@ using SimpleMovieSearch.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using SimpleMovieSearch.Domain.ViewModels.Movie;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace SimpleMovieSearch.Controllers
 {
@@ -18,14 +19,14 @@ namespace SimpleMovieSearch.Controllers
         }
          
         [HttpGet]
-        public async Task<IActionResult> MovieIndex() //список всех фильмов
+        public  IActionResult MovieIndex() //список всех фильмов
         {
-            var resp = await _movieService.GetMovieList();
+            var resp = _movieService.GetMovieList();
             if (resp.StatusName == StatusName.OK)
             {
                 return View(resp.Data);
             }
-            return View(resp.Data);
+            return View("Error", $"{resp.Description}");
         }
 
         [HttpGet]
@@ -39,10 +40,17 @@ namespace SimpleMovieSearch.Controllers
             return View(resp.Data);
         }
 
-        
-
-
-
+         
+        public async Task<IActionResult> SearchMovie(string search) // Search Movie
+        {
+            var movie = await _movieService.GetMovieName(search);
+            if (movie.StatusName == StatusName.OK)
+            {
+                ViewData["search"] = search;
+                return View(movie.Data);
+            }
+            return View("Error");
+        }
 
 
 
