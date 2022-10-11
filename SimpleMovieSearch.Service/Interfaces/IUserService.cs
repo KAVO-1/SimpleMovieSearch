@@ -11,7 +11,7 @@ namespace SimpleMovieSearch.Service.Interfaces
 {
     public interface IUserService
     {
-        Task<IBaseResponse<User>> Create(UserViewModel model);
+        Task<IBaseResponse<Users>> Create(UserViewModel model);
         Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsers();
         BaseResponse<Dictionary<int, string>> GetRoles();
     }

@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBaseRepositoriy<Movie>, MovieRepositoriy>();
 builder.Services.AddScoped<IMovieService, MovieService>();
-builder.Services.AddScoped<IBaseRepositoriy<User>, UserRepository>();;
+builder.Services.AddScoped<IBaseRepositoriy<Users>, UserRepository>();;
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 

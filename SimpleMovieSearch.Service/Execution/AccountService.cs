@@ -18,9 +18,9 @@ namespace SimpleMovieSearch.Service.Execution
 {
     public class AccountService : IAccountService
     {
-        private readonly IBaseRepositoriy<User> _userRepository;
+        private readonly IBaseRepositoriy<Users> _userRepository;
         private readonly ILogger<AccountService> _logger;
-        public AccountService(IBaseRepositoriy<User> userRepository,
+        public AccountService(IBaseRepositoriy<Users> userRepository,
             ILogger<AccountService> logger)
         {
             _userRepository = userRepository;
@@ -40,14 +40,14 @@ namespace SimpleMovieSearch.Service.Execution
                     };
                 }
 
-                user = new User()
+                user = new Users()
                 {
                     Name = model.Name,
+                    Password = model.Password,
                     Role = Role.User,
-                    Password = model.Password
                 };
 
-               
+                await _userRepository.Create(user);
                 var result = Authenticate(user);
 
                 return new BaseResponse<ClaimsIdentity>()
@@ -108,7 +108,7 @@ namespace SimpleMovieSearch.Service.Execution
 
 
 
-        private ClaimsIdentity Authenticate(User user)
+        private ClaimsIdentity Authenticate(Users user)
         {
             var claims = new List<Claim>
             {

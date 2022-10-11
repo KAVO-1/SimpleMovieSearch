@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SimpleMovieSearch.Service.Execution
 {
@@ -33,6 +34,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Name = movieViewModels.Name,
                     Description = movieViewModels.Description,
                     Country = movieViewModels.Country,
+                    Image = movieViewModels.Image,
                     //MoviesCategory = (MoviesCategory)Convert.ToInt32(movieViewModels.MoviesCategory),
                 };
                 await _movieRepository.Create(movie);
@@ -105,6 +107,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Description = movie.Description,
                     Name = movie.Name,
                     Country = movie.Country,
+                    Image = movie.Image,
                     //MoviesCategory = movie.MoviesCategory.GetDisplayName()
                 };
 
@@ -174,6 +177,7 @@ namespace SimpleMovieSearch.Service.Execution
                 movie.Name = model.Name; 
                 movie.Country = model.Country;
                 movie.Description = model.Description;
+                movie.Image = model.Image;
                 //movie.MoviesCategory = model.MoviesCategory;
 
                 await _movieRepository.Update(movie);
@@ -215,7 +219,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Description = movie.Description,
                     Country = movie.Country,
                     MoviesCategory = movie.MoviesCategory,
-
+                    Image = movie.Image,
                 };
 
                 return new BaseResponse<MovieViewModels>()

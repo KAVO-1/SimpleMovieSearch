@@ -8,11 +8,11 @@ namespace SimpleMovieSearch.DAL
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
             : base(options)
         {
-            //Database.EnsureCreated(); //Add database
+            Database.EnsureCreated(); //Add database
         } 
 
         public DbSet<Movie> Movie { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
 
 
     }

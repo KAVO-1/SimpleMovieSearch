@@ -15,14 +15,14 @@ namespace SimpleMovieSearch.Service.Execution
     public class UserService : IUserService
     {
         private readonly ILogger<UserService> _logger;
-        private readonly IBaseRepositoriy<User> _userRepository;
+        private readonly IBaseRepositoriy<Users> _userRepository;
 
-        public UserService(ILogger<UserService> logger, IBaseRepositoriy<User> userRepository)
+        public UserService(ILogger<UserService> logger, IBaseRepositoriy<Users> userRepository)
         { 
             _logger = logger;
             _userRepository = userRepository;
         }
-        public Task<IBaseResponse<User>> Create(UserViewModel model)
+        public Task<IBaseResponse<Users>> Create(UserViewModel model)
         {
             throw new NotImplementedException();
         }

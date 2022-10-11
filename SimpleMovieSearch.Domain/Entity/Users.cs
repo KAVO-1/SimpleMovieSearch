@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SimpleMovieSearch.Domain.Entity
 {
-    public class User
+    public class Users 
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public string Password { get; set; }
 

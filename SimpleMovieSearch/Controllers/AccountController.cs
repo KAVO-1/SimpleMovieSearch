@@ -41,6 +41,7 @@ namespace SimpleMovieSearch.Controllers
         }
 
 
+
         [HttpGet]
         public IActionResult Login() => View();
 

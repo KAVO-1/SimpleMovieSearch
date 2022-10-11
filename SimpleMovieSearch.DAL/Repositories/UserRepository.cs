@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleMovieSearch.DAL.Repositories
 {
-    public class UserRepository : IBaseRepositoriy<User>
+    public class UserRepository : IBaseRepositoriy<Users>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -17,24 +17,24 @@ namespace SimpleMovieSearch.DAL.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Create(User entity)
+        public async Task Create(Users entity)
         {
             await _dbContext.Users.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(User entity)
+        public async Task Delete(Users entity)
         {
             _dbContext.Users.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<User> GetAll()
+        public IQueryable<Users> GetAll()
         {
            return _dbContext.Users;
         }
 
-        public async Task<User> Update(User entity)
+        public async Task<Users> Update(Users entity)
         {
             _dbContext.Users.Update(entity);
             await _dbContext.SaveChangesAsync();
