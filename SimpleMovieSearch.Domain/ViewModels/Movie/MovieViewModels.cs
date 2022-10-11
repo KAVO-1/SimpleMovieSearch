@@ -20,7 +20,8 @@ namespace SimpleMovieSearch.Domain.ViewModels.Movie
         public string? Description { get; set; }
 
         public string? Country { get; set; }
-
+         
         public string? MoviesCategory { get; set; }
+        public string? Image { get; set; }
     }
 }

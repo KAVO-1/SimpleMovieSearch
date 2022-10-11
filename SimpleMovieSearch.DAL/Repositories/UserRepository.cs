@@ -8,26 +8,37 @@ using System.Threading.Tasks;
 
 namespace SimpleMovieSearch.DAL.Repositories
 {
-    internal class UserRepository : IBaseRepositoriy<User>
+    public class UserRepository : IBaseRepositoriy<Users>
     {
-        public Task Create(User entity)
+        private readonly ApplicationDbContext _dbContext;
+
+        public UserRepository(ApplicationDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task Delete(User entity)
+        public async Task Create(Users entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.Users.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<User> GetAll()
+        public async Task Delete(Users entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Users.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<User> Update(User entity)
+        public IQueryable<Users> GetAll()
         {
-            throw new NotImplementedException();
+           return _dbContext.Users;
+        }
+
+        public async Task<Users> Update(Users entity)
+        {
+            _dbContext.Users.Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

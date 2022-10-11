@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-sm  bg-dark pb-1 ">
             <div class="container-fluid">
                 <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <img class="filmEffect" src="~/images/Logo.png" width="80" height="80"/>
+                    <img class="filmEffect image-dark" src="~/images/Logo.png" width="80" height="80"/>
                 </a> 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -37,27 +37,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="" asp-controller="Movie" asp-action="MovieIndex">Movie List</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Account" asp-action="Register">Registration</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-white-50" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
                     </ul>
-                </div>
-
-
-                         <div class="navbar-nav flex-grow-4">
-                             <from asp-action="MovieSearch" >
-                                <span class="btn-group pb-1">
-                                    <input type="text" name="search" />
-                                    <input class="p-1 ml-2 btn btn-outline-danger" type="submit" value="GO" />
-                                </span>
-                             </from>
-                         </div>
-
+                </div> 
 
             </div>
+                <div class="mx-auto" style="width: 300px;">
+                    <form asp-action="SearchMovie"asp-controller="Movie">
+                        <span class="btn-group pb-1">
+                         <input type="text" name="search" />
+                            <input class="p-1 ml-2 btn btn-outline-danger" type="submit" value="GO" />
+                        </span>
+                     </form>
+                </div>
+
         </nav>
     </header>
 
 
-    <div class="container-fluid">
-        <main role="main" class="pb-2">
+    <div>
+        <main role="main" class="">
             @RenderBody()
         </main>
     </div>

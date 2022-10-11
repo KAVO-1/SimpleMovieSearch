@@ -11,6 +11,7 @@ namespace SimpleMovieSearch.Domain.Enum
 
         UserNotFound = 0,
         MovieNotFound = 47,
+        UserAlreadyExists = 1,
         OK = 200,
         InternalServerError = 500,
     } 
