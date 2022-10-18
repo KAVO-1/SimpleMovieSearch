@@ -23,5 +23,6 @@ namespace SimpleMovieSearch.Domain.ViewModels.Movie
          
         public string? MoviesCategory { get; set; }
         public string? Image { get; set; }
+        public string? Video { get; set; } 
     }
 }

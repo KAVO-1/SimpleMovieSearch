@@ -62,9 +62,9 @@ namespace SimpleMovieSearch.Controllers
 
             if (resp.StatusName == StatusName.OK)
             {
-                return View(resp.Data);
+                return RedirectToAction("MovieIndex");
             }
-            return RedirectToAction("Error");
+            return View("Error", $"{resp.Description}");
 
         }
 

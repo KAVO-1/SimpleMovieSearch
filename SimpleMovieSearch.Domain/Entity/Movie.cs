@@ -15,6 +15,7 @@ namespace SimpleMovieSearch.Domain.Entity
         public string? MoviesCategory { get; set; }
 
         public string? Image { get; set; }
+        public string? Video { get; set; } 
 
     }
 }

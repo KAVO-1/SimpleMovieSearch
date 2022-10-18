@@ -70,6 +70,7 @@ namespace SimpleMovieSearch.Service.Execution
                         Data = false
                     };
                 }
+                await _movieRepository.Delete(movie);
 
                 return new BaseResponse<bool>()
                 {
@@ -108,6 +109,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Name = movie.Name,
                     Country = movie.Country,
                     Image = movie.Image,
+                    Video = movie.Video,
                     //MoviesCategory = movie.MoviesCategory.GetDisplayName()
                 };
 
@@ -200,7 +202,7 @@ namespace SimpleMovieSearch.Service.Execution
             }
         }
 
-        public async Task<IBaseResponse<MovieViewModels>> GetMovieName(string name)
+        public async Task<IBaseResponse<MovieViewModels>> GetMovieName(string name) 
         {
             try
             {
@@ -220,6 +222,7 @@ namespace SimpleMovieSearch.Service.Execution
                     Country = movie.Country,
                     MoviesCategory = movie.MoviesCategory,
                     Image = movie.Image,
+                    Video = movie.Video,
                 };
 
                 return new BaseResponse<MovieViewModels>()
