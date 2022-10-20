@@ -5,21 +5,56 @@
     Layout = "_Layout";
 }
 <br />
-
-<div class="container navbar bg-dark col-sm">
+<section class="first">
+<div class="container navbar col-sm card-text first__title">
     <div class="row">
-        <div class="col-sm-2">
-            <a><img src="@Model.Image" class="imagePosters"></a>
-            <video src="@Model.Video" poster="~/images/horror/9.jpg" controls></video>
-
+        <div class="col">
+            <a><img src="@Model.Image"></a>
         </div>
-        <div class="">
-            <div class="card-body">
-                <h5 class="card-title text-center">@Model?.Name</h5>
-                <p class="card-text"><b>Описание: </b>@Model?.Description</p>
-                <p class="card-text"><b>Страна: </b>@Model?.Country</p>
-                <p class="card-text"><b>Жанр: </b>@Model?.MoviesCategory</p>
-            </div>
+        <div class="col-md">
+            <h5 class="card-title text-center">@Model?.Name (@Model?.WorldPremiere)</h5>
+            <p class="card-text"><b>Описание: </b>@Model?.Slogan</p>
+            <p class="card-text"><b>Страна: </b>@Model?.Country</p>
+            <p class="card-text"><b>Жанр: </b>@Model?.MoviesCategory</p>
+            <p class="card-text"><b>Продюсер: </b>@Model?.Producer</p>
+            <p class="card-text"><b>Режиссёр: </b>@Model?.Director</p>
+            <p class="card-text"><b>Возраст: </b>@Model?.Age+</p>
+            <p class="card-text"><b>Сборы в мире: </b>$@Model?.Fees</p>
+            <p class="card-text"><b>Длительность: </b>@Model?.Time мин</p>
+            <p class="card-text"><b>Премьера в мире: </b>@Model?.WorldPremiere</p>
         </div>
     </div>
+      <div class="card-body">
+            <video src="@Model?.Video" poster="~/images/Logo.png" controls width="400" height="400" loop></video>
+      </div>
 </div>
+</section>
+
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+    body{
+        margin: 0;
+    }
+    .first {
+        min-height: 100vh;
+        position: relative;
+
+    }
+    .first__title {
+            position: relative;
+            z-index: 10;
+    }
+    .first__video {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+ </style>

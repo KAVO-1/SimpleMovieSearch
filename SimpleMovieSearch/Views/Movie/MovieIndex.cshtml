@@ -1,53 +1,32 @@
 ﻿@model List<SimpleMovieSearch.Domain.Entity.Movie> 
 
 
-<section class="first">
-    <video src="~/video/228.MP4" muted autoplay loop class="first__video"></video>
-    <div class="row first__title text-center">
-        @foreach (var movie in Model)
-        {
-            <div class="container-fluid  col-md-2 text-center">
-                <div class="col ">
+<div class="row first__title text-center">
+    @foreach (var movie in Model)
+    {
+        <div class="container-fluid  col-md-2 text-center">
+            <div class="col ">
                        
-                    @*<div class="card-body">        
-                        <p>@movie.Description</p>
-                    </div>*@    
-                    <div class="">
-                        <a asp-action="GetMovie" asp-route-id="@movie.Id" class="">
-                            <img src="@movie.Image" class="imagePosters filmEffect  image-dark"  alt="@movie.Name"></a>
-                            <h5 class="text-center">@movie.Name</h5>     
-                        @* <a asp-controller="Basket" asp-action="Add" asp-route-id="@id" class="card-link">Добавить</a> *@
+                @*<div class="card-body">        
+                    <p>@movie.Description</p>
+                </div>*@    
+                <div class="">
+                    <a asp-action="GetMovie" asp-route-id="@movie.Id" class="">
+                        <img src="@movie.Image" class="imagePosters filmEffect  image-dark"  alt="@movie.Name"></a>
+                        <h5 class="text-center">@movie.Name</h5>     
+                    @* <a asp-controller="Basket" asp-action="Add" asp-route-id="@id" class="card-link">Добавить</a> *@
+                        <div class="card-body">
+                               
                         @if (User.IsInRole("Admin"))
-                        {
-                            <hr/>
-                            <a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">Удалить</a>
-                            <a asp-controller="Movie" asp-action="Save" asp-route-id="@movie.Id" class="btn btn-primary">Изменить</a>
+                        { <button class="btn btn-primary" onclick="openModal({ url: '/Movie/Save', data: '@movie.Id' })"
+                                data-toggle="ajax-modal" data-target="Modal">Открыть</button>
+                            <a asp-controller="Car" asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">Удалить</a>
                         }
-                    </div>
-                    
+                        </div>
                 </div>
+                    
             </div>
-        }
-    </div>   
-</section>
+        </div>
+    }
+</div>
    
-
- <style>
-
-    .first {
-        min-height: 100vh;
-        position: relative;
-    }
-    .first__title {
-        position: relative;
-        z-index: 10;
-    }
-    .first__video {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
- </style>
