@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-sm  bg-dark pb-1 ">
             <div class="container-fluid">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
+                <a asp-area="" asp-controller="Movie" asp-action="MovieIndex">
                     <img class="filmEffect image-dark" src="~/images/Logo.png" width="80" height="80"/>
                 </a> 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -30,13 +30,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="" asp-controller="Movie" asp-action="MovieIndex">Movie List</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="" asp-controller="Account" asp-action="Register">Registration</a>
@@ -62,14 +56,33 @@
 
 
     <div>
-        <main role="main" class="">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
+<div class="modal fade" id="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Информация</h5>
+      </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-close btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            @if (User.IsInRole("Admin"))
+            {
+                <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>   
+            }
+        </div>
+    </div>
+  </div>
+</div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/modal.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
     <footer class="mt-auto page-footer font-small blue">

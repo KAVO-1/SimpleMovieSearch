@@ -32,9 +32,15 @@ namespace SimpleMovieSearch.Service.Execution
                 var movie = new Movie()
                 {
                     Name = movieViewModels.Name,
-                    Description = movieViewModels.Description,
+                    Slogan = movieViewModels.Slogan,
                     Country = movieViewModels.Country,
                     Image = movieViewModels.Image,
+                    Age = movieViewModels.Age,
+                    Fees = movieViewModels.Fees,
+                    Producer = movieViewModels.Producer,
+                    Director = movieViewModels.Director,
+                    Time = movieViewModels.Time,
+                    WorldPremiere = movieViewModels.WorldPremiere,
                     //MoviesCategory = (MoviesCategory)Convert.ToInt32(movieViewModels.MoviesCategory),
                 };
                 await _movieRepository.Create(movie);
@@ -105,11 +111,17 @@ namespace SimpleMovieSearch.Service.Execution
 
                 var data = new MovieViewModels()
                 {
-                    Description = movie.Description,
+                    Slogan = movie.Slogan,
                     Name = movie.Name,
                     Country = movie.Country,
                     Image = movie.Image,
                     Video = movie.Video,
+                    Fees = movie.Fees,
+                    WorldPremiere = movie.WorldPremiere,
+                    Time = movie.Time,
+                    Age = movie.Age,
+                    Producer = movie.Producer,
+                    Director = movie.Director,
                     //MoviesCategory = movie.MoviesCategory.GetDisplayName()
                 };
 
@@ -178,8 +190,14 @@ namespace SimpleMovieSearch.Service.Execution
 
                 movie.Name = model.Name; 
                 movie.Country = model.Country;
-                movie.Description = model.Description;
+                movie.Slogan = model.Slogan;
                 movie.Image = model.Image;
+                movie.Fees = model.Fees;
+                movie.Producer = model.Producer;
+                movie.Age = model.Age;
+                movie.Time = model.Time;
+                movie.WorldPremiere = model.WorldPremiere;
+                movie.Director = model.Director;
                 //movie.MoviesCategory = model.MoviesCategory;
 
                 await _movieRepository.Update(movie);
@@ -218,11 +236,16 @@ namespace SimpleMovieSearch.Service.Execution
                 var data = new MovieViewModels()
                 {   
                     Name = movie.Name,
-                    Description = movie.Description,
+                    Slogan = movie.Slogan,
                     Country = movie.Country,
-                    MoviesCategory = movie.MoviesCategory,
                     Image = movie.Image,
-                    Video = movie.Video,
+                    Age = movie.Video,
+                    Fees = movie.Fees,
+                    Producer = movie.Producer,
+                    Director = movie.Director,
+                    Time = movie.Time,
+                    WorldPremiere = movie.WorldPremiere,
+                    //MoviesCategory = movie.MoviesCategory,
                 };
 
                 return new BaseResponse<MovieViewModels>()

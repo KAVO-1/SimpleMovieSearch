@@ -74,13 +74,13 @@ namespace SimpleMovieSearch.Controllers
         {
             if (id == 0)
             {
-                return View();
+                return PartialView();
             }
 
             var resp = await _movieService.GetMovie(id);
             if (resp.StatusName == StatusName.OK)
             {
-                return View(resp.Data);
+                return PartialView(resp.Data);
             }
             return RedirectToAction("Error");
 
